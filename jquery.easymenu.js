@@ -85,13 +85,13 @@ USAGE:
 						css.left = parseInt(p_pos.left);
 						css.top = parseInt(p_pos.top) + p_h;
 					} else {
-						css.left = parseInt(p_pos.left) + p_w;
+						css.left = parseInt(p_pos.left) + p_w - 1;
 						css.top = parseInt(p_pos.top);
 					}
 
 					// 修正子菜单的位置，确保在屏幕内
 					var p_offset = $(this).offset();
-					if ((p_offset.left + p_w + w) > $(document).width()) css.left = css.left - w - p_w;
+					if ((p_offset.left + p_w + w) > $(document).width()) css.left = css.left - w - p_w + 1;
 
 					// 显示子菜单
 					submenu.stop().css(css).fadeTo(options.fade_time, 1);
