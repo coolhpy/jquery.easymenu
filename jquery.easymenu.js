@@ -46,22 +46,22 @@ USAGE:
 			'main_item_class' : 'main-item',	// 主菜单项的class
 			'sub_item_class' : 'sub-item',	// 子菜单项的class
 			'separator_class' : 'separator',	// 分隔符的class
-			'has_child_class' : 'has-child',	// 含有子菜单时的class
-			'fade_time' : 200	// 子菜单渐显、渐隐的时间，单位：毫秒
+			'has_child_class' : 'has-child'	// 含有子菜单时的class
 		};
 		options = $.extend(default_options, options);
 
 		this.each(function(i, item) {
+			
 			// 区分主菜单项和子菜单项
 			$(item).children('li').addClass(options.main_item_class).find('li').addClass(options.sub_item_class);
-
+			
 			$(item)
 			// 判断子菜单项类型
-			.find('li').each(function(i, item) {
+			.find('li').each(function(j, li) {
 				// 给空的菜单项添加separator类
-				if ($(item).html() == '') $(item).removeClass().addClass(options.separator_class);
+				if ($(li).html() == '') $(li).removeClass().addClass(options.separator_class);
 				// 如果有子菜单，则添加has_child类
-				if ($(item).children('ul').length > 0) $(item).addClass(options.has_child_class);
+				if ($(li).children('ul').length > 0) $(li).addClass(options.has_child_class);
 			})
 
 			// 菜单事件处理
@@ -94,7 +94,7 @@ USAGE:
 					if ((p_offset.left + p_w + w) > $(document).width()) css.left = css.left - w - p_w + 1;
 
 					// 显示子菜单
-					submenu.stop().css(css).fadeTo(options.fade_time, 1);
+					submenu.css(css).show();
 				}
 			}, function() {
 				// 不是分隔符则移除hover类
@@ -103,9 +103,7 @@ USAGE:
 				// 有子菜单，则隐藏
 				if ($(this).hasClass(options.has_child_class)) {
 					var submenu = $(this).children('ul');
-					submenu.stop().fadeTo(options.fade_time, 0, function(){
-						submenu.hide();
-					});
+					submenu.hide();
 				}
 			});
 		});
