@@ -6,8 +6,8 @@
  * 
  * @author	Hpyer
  * @home	http://hpyer.cn
- * @version	1.0.1
- * @release	2013-12-11
+ * @version	1.0.2
+ * @release	2014-01-03
  */
 
 /*
@@ -73,25 +73,26 @@ USAGE:
 				if ($(this).hasClass(options.has_child_class)) {
 					var submenu = $(this).children('ul');
 					var is_first_submenu = $(this).hasClass(options.main_item_class);
-					var p_pos = $(this).position();
-					var p_w = parseInt($(this).outerWidth());
-					var p_h = parseInt($(this).outerHeight());
-					var w = parseInt(submenu.outerWidth());
-					var h = parseInt(submenu.outerHeight());
+					var p_pos = $(this).position();				// 当前菜单项位置
+					var p_w = parseInt($(this).outerWidth());	// 当前菜单项宽
+					var p_h = parseInt($(this).outerHeight());	// 当前菜单项高
+					var w = parseInt(submenu.outerWidth());		// 当前子菜单宽
+					var h = parseInt(submenu.outerHeight());	// 当前子菜单高
 
 					// 区分处理一级子菜单的位置
 					var css = {};
+					var p_offset = $(this).offset();	// 当前菜单的位置
 					if (is_first_submenu) {
 						css.left = parseInt(p_pos.left);
 						css.top = parseInt(p_pos.top) + p_h;
+						// 如果超出屏幕，则将一级子菜单的left-当前子菜单宽+当前菜单项宽+1
+						if ((p_offset.left + w) > $(document).width()) css.left = css.left - w + p_w + 1;
 					} else {
 						css.left = parseInt(p_pos.left) + p_w - 1;
 						css.top = parseInt(p_pos.top);
+						// 如果超出屏幕，则将子菜单的left-当前子菜单宽-当前菜单项宽+1
+						if ((p_offset.left + p_w + w) > $(document).width()) css.left = css.left - w - p_w + 1;
 					}
-
-					// 修正子菜单的位置，确保在屏幕内
-					var p_offset = $(this).offset();
-					if ((p_offset.left + p_w + w) > $(document).width()) css.left = css.left - w - p_w + 1;
 
 					// 显示子菜单
 					submenu.css(css).show();
