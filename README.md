@@ -1,6 +1,6 @@
 #jquery_easymenu
 
-===概要===
+概要
 
 这个一个jQuery的插件，它可以让您创建下拉试的导航菜单更加简单。
 
@@ -9,12 +9,13 @@
     轻量级，源码（含注释）还不到4K
     符合标准的html代码
 
-===示例===
+示例
 
 http://demo.hpyer.cn/js/easymenu/easymenu.html
 
-===使用===
+使用
 
+<code>
 <html>
 <head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
@@ -39,3 +40,4 @@ http://demo.hpyer.cn/js/easymenu/easymenu.html
 <script>$('#menu').easymenu();</script>
 </body>
 </html>
+</code>
